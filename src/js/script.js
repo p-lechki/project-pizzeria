@@ -59,10 +59,11 @@
       thisProduct.id = id;
       thisProduct.data = data;
       thisProduct.renderInMenu();
-      thisProduct.getElement();
+      thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
       thisProduct.processOrder();
+      thisProduct.removeActive();
       console.log('new Product: ', thisProduct);
     }
     renderInMenu() {
@@ -77,7 +78,7 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
-    getElement() {
+    getElements() {
       const thisProduct = this;
 
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
@@ -85,6 +86,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion() {
@@ -95,6 +97,7 @@
       thisProduct.accordionTrigger.addEventListener('click', function (event) {
         /* prevent default action for event */
         event.preventDefault();
+        thisProduct.removeActive();
         /* toggle active class on element of thisProduct */
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
         /* find all active products */
@@ -153,17 +156,32 @@
           if (optionSelected && !option.default) {
             // add price of option to variable price
             price += option.price;
-            console.log('price if: ', price)
+            console.log('price if: ', price);
             // START ELSE IF: if option in not selected and option is default
           } else if (!optionSelected && option.default) {
             // deduct priace of option form price
             price -= option.price;
             console.log('price else if: ', price);
           } // END ELSE IF
+          const activeImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+          console.log('activeImage: ', activeImage);
+          // START IF product is selected and have imgage
+          if (optionSelected && activeImage) {
+            activeImage.classList.add(classNames.menuProduct.imageVisible);
+          } else if (activeImage) {
+            activeImage.classList.remove(classNames.menuProduct.imageVisible);
+          }
         } // END LOOP for each optionId in param.options
       } // END LOOP: for each paramId in thisProduct.data.params
       // set the contents of thisProduct.priceElem to be the value of variable price
       thisProduct.priceElem.innerHTML = price;
+    }
+    removeActive() {
+      const activeElements = document.querySelectorAll(classNames.menuProduct.wrapperActive);
+      for (let activeElement of activeElements) {
+
+        activeElement.classList.remove(classNames.menuProduct.wrapperActive);
+      }
     }
 
   }
