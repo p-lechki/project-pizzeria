@@ -135,7 +135,6 @@
           }
           /* END LOOP: for each active product */
         }
-
         /* toggle active class on element of thisProduct */
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
         /* find all active products */
