@@ -124,10 +124,7 @@
       thisProduct.accordionTrigger.addEventListener('click', function (event) {
         /* prevent default action for event */
         event.preventDefault();
-        /* toggle active class on element of thisProduct */
-        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
-        /* find all active products */
-        const activeProducts = document.querySelectorAll(classNames.menuProduct.menuProductsActive);
+        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
         /* START LOOP: for each active product */
         for (let activeProduct of activeProducts) {
           /* START: if the active product isn't the element of thisProduct */
@@ -138,9 +135,16 @@
           }
           /* END LOOP: for each active product */
         }
+
+        /* toggle active class on element of thisProduct */
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        /* find all active products */
+
         /* END: click event listener to trigger */
+
       });
     }
+
     initOrderForm() {
       const thisProduct = this;
       // console.log('initOrderForm thisProduct: ', thisProduct);
@@ -195,8 +199,8 @@
             if (!thisProduct.params[paramId]) {
               thisProduct.params[paramId] = {
                 label: param.label,
-                options: {},
-              }
+                options: {}
+              };
             }
             thisProduct.params[paramId].options[optionId] = option.label;
             // add price of option to variable price
