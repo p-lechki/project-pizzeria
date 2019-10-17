@@ -71,6 +71,11 @@
     cart: {
       defaultDeliveryFree: 20,
     },
+    db: {
+      url: '//localhost:3131',
+      product: 'product',
+      order: 'order',
+    },
   };
 
   const templates = {
@@ -257,6 +262,7 @@
 
       thisWidget.element = element;
       thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      console.log('thisWidget.input: ', thisWidget.input);
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
@@ -278,7 +284,7 @@
       const thisWidget = this;
 
       thisWidget.input.addEventListener('change', function () {
-        thisWidget.setValue(thisWidget.input);
+        thisWidget.setValue(thisWidget.input.value);
       });
 
       thisWidget.linkDecrease.addEventListener('click', function (event) {
@@ -466,7 +472,25 @@
     initData: function () {
       const thisApp = this;
 
-      thisApp.data = dataSource;
+      thisApp.data = {};
+      const url = settings.db.url + '/' + settings.db.product;
+
+      fetch(url)
+        .then(function (rawResponse) {
+          return rawResponse.json();
+        })
+        .then(function (parsedResponse) {
+          console.log('parsedResponse: ', parsedResponse);
+
+          /* save parsedResponse as thisApp.data */
+          thisApp.data.products = parsedResponse;
+
+          /* execute initMenu method */
+          thisApp.initMenu();
+
+        });
+
+      console.log('thisApp.data: ', JSON.stringify(thisApp.data));
     },
 
     initMenu: function () {
@@ -475,9 +499,10 @@
       // console.log('thisApp.data: ', thisApp.data);
 
       for (let productData in thisApp.data.products) {
-        new Product(productData, thisApp.data.products[productData]);
+        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
       }
     },
+
 
     initCart: function () {
       const thisApp = this;
@@ -495,7 +520,6 @@
       // console.log('templates:', templates);
 
       thisApp.initData();
-      thisApp.initMenu();
       thisApp.initCart();
     },
   };
