@@ -325,9 +325,10 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = element.querySelector(select.cart.productList);
       thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
-      // console.log('thisCart.dom.form: ', thisCart.dom.form);
       thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
       thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
+
+
 
       thisCart.renderTotalKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
 
@@ -445,7 +446,7 @@
           return response.json();
         }).then(function (parsedResponse) {
           console.log('parsedResponse: ', parsedResponse);
-        })
+        });
     }
   }
 
@@ -474,6 +475,8 @@
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+
+
     }
 
     initAmountWidget() {
