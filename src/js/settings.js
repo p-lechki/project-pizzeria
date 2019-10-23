@@ -1,4 +1,8 @@
-/* golbal Hendelbars */
+/* golbal Handlebars */
+
+// import {
+//   Handlebars
+// } from '../vendor/h';
 
 export const select = {
   templateOf: {
