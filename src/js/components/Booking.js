@@ -8,6 +8,9 @@ import {
 import {
   AmountWidget
 } from './AmountWidget.js';
+import {
+  DatePicker
+} from './DatePicker.js';
 
 export class Booking {
   constructor(element) {
@@ -30,6 +33,7 @@ export class Booking {
 
     thisBooking.dom.peopleAmount = element.querySelector(select.booking.peopleAmount);
     thisBooking.dom.hoursAmount = element.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.datePicker = element.querySelector(select.widgets.datePicker.wrapper);
   }
 
   initWidgets() {
@@ -37,5 +41,6 @@ export class Booking {
 
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
   }
 }
