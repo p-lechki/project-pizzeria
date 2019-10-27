@@ -1,7 +1,8 @@
 import {
   templates,
   select,
-  settings
+  settings,
+  classNames
 } from '../settings.js';
 import {
   utils
@@ -41,6 +42,7 @@ export class Booking {
     thisBooking.dom.hoursAmount = element.querySelector(select.booking.peopleAmount);
     thisBooking.dom.datePicker = element.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = element.querySelector(select.widgets.hourPicker.wrapper);
+    thisBooking.dom.tables = element.querySelectorAll(select.booking.tables);
   }
 
   initWidgets() {
@@ -50,6 +52,10 @@ export class Booking {
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+
+    thisBooking.dom.wrapper.addEventListener('update', function () {
+      thisBooking.updateDOM();
+    });
   }
 
   getData() {
@@ -121,6 +127,7 @@ export class Booking {
         }
       }
     }
+    thisBooking.updateDOM();
     console.log('thisBooking.booked: ', thisBooking.booked);
   }
 
@@ -138,6 +145,25 @@ export class Booking {
         thisBooking.booked[date][hourBlock] = [];
       }
       thisBooking.booked[date][hourBlock].push(table);
+    }
+  }
+
+  updateDOM() {
+    const thisBooking = this;
+    console.log('Bomb has been planted!');
+
+    thisBooking.date = thisBooking.datePicker.value;
+    thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+
+    for (let table of thisBooking.dom.tables) {
+      let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+      tableId = parseInt(tableId);
+
+      if (thisBooking.booked[thisBooking.date] && thisBooking.booked[thisBooking.date][thisBooking.hour] && thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)) {
+        table.classList.add(classNames.booking.tableBooked);
+      } else {
+        table.classList.remove(classNames.booking.tableBooked);
+      }
     }
   }
 
