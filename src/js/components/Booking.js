@@ -79,10 +79,10 @@ export class Booking {
     console.log('get Data urls: ', urls);
 
     Promise.all([
-        fetch(urls.booking),
-        fetch(urls.eventsCurrent),
-        fetch(urls.eventsRepeat),
-      ])
+      fetch(urls.booking),
+      fetch(urls.eventsCurrent),
+      fetch(urls.eventsRepeat),
+    ])
       .then(function ([bookingResponse, eventsCurrentResponse, eventsRepeatResponse]) {
         return Promise.all([
           bookingResponse.json(),
@@ -95,18 +95,21 @@ export class Booking {
       });
   }
 
-  parseData(booking, eventsCurrent, eventsRepeat) {
+  parseData(bookings, eventsCurrent, eventsRepeat) {
     const thisBooking = this;
 
     thisBooking.booked = {};
+
+    console.log('eventsCurrent: ', eventsCurrent);
+
+    for (let item of bookings) {
+      thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
+    }
+
     for (let item of eventsCurrent) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
-    console.log(thisBooking.booked);
 
-    for (let item of booking) {
-      thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
-    }
 
     const minDate = thisBooking.datePicker.minDate;
     const maxDate = thisBooking.datePicker.maxDate;
@@ -114,28 +117,29 @@ export class Booking {
     for (let item of eventsRepeat) {
       if (item.repeat == 'daily') {
         for (let loopDate = minDate; loopDate <= maxDate; loopDate = utils.addDays(loopDate, 1)) {
-          thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
+          thisBooking.makeBooked(utils.dateToStr(loopDate), item.hour, item.duration, item.table);
         }
       }
     }
-
-
+    console.log('thisBooking.booked: ', thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table) {
     const thisBooking = this;
+
     if (typeof thisBooking.booked[date] == 'undefined') {
       thisBooking.booked[date] = {};
     }
 
     const startHour = utils.hourToNumber(hour);
 
-    for (let hourBlocked = startHour; hourBlocked < startHour + duration; hourBlocked += 0.5) {
-      if (typeof thisBooking.booked[date][startHour] == 'undefined') {
-        thisBooking.booked[date][startHour] = [];
+    for (let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5) {
+      if (typeof thisBooking.booked[date][hourBlock] == 'undefined') {
+        thisBooking.booked[date][hourBlock] = [];
       }
-      thisBooking.booked[date][startHour].push(table);
+      thisBooking.booked[date][hourBlock].push(table);
     }
   }
 
 }
+
