@@ -1,4 +1,5 @@
 /* golbal Handlebars */
+/* eslint-disable no-undef */
 
 // import {
 //   Handlebars
