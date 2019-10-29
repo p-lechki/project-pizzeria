@@ -26,6 +26,7 @@ export class Booking {
     thisBooking.reneder(thisBooking.element);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.makeReservation();
   }
   reneder(element) {
     const thisBooking = this;
@@ -74,7 +75,7 @@ export class Booking {
       eventsRepeat: settings.db.repeatParam + '&' + utils.queryParams(endDate),
     };
 
-    console.log('getData params: ', params);
+    // console.log('getData params: ', params);
 
     const urls = {
       booking: settings.db.url + '/' + settings.db.booking + '?' + params.booking,
@@ -82,7 +83,7 @@ export class Booking {
       eventsRepeat: settings.db.url + '/' + settings.db.event + '?' + params.repeatParam,
     };
 
-    console.log('get Data urls: ', urls);
+    // console.log('get Data urls: ', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -106,7 +107,7 @@ export class Booking {
 
     thisBooking.booked = {};
 
-    console.log('eventsCurrent: ', eventsCurrent);
+    // console.log('eventsCurrent: ', eventsCurrent);
 
     for (let item of bookings) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -128,7 +129,7 @@ export class Booking {
       }
     }
     thisBooking.updateDOM();
-    console.log('thisBooking.booked: ', thisBooking.booked);
+    // console.log('thisBooking.booked: ', thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table) {
@@ -150,7 +151,7 @@ export class Booking {
 
   updateDOM() {
     const thisBooking = this;
-    console.log('Bomb has been planted!');
+    // console.log('Bomb has been planted!');
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
@@ -167,5 +168,40 @@ export class Booking {
     }
   }
 
+  makeReservation() {
+    const thisBooking = this;
+
+    for (let table of thisBooking.dom.tables) {
+
+      table.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        table.classList.toggle(classNames.booking.tableBooked);
+
+        let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+        tableId = parseInt(tableId);
+        console.log('tableId: ', tableId);
+
+        let reservation = {
+          date: thisBooking.datePicker.value,
+          hour: thisBooking.hourPicker.value,
+          table: tableId,
+          repeat: 'false',
+          duration: '',
+          ppl: 3,
+          starters: [],
+        };
+
+        thisBooking.doneReservation = reservation;
+        console.log('reservation: ', thisBooking.doneReservation);
+
+
+      });
+    }
+  }
 }
+
+
+
+
 

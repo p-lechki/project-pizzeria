@@ -59,6 +59,6 @@ export class DatePicker extends BaseWidget {
     return true;
   }
 
-  reanderValue() {}
+  reanderValue() { }
 
 }
