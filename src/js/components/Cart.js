@@ -119,7 +119,7 @@ export class Cart {
 
   sendOrder() {
     const thisCart = this;
-    const url = settings.db.url + '/' + settings.db.order;
+    const url = new URL(settings.db.url, 'http:${settings.db.order}');
 
     const payload = {
       phone: thisCart.dom.phone.value,
