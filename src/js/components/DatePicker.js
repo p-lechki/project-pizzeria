@@ -43,7 +43,7 @@ export class DatePicker extends BaseWidget {
         firstDayOfWeek: 1,
       },
       onChange: function (dateStr) {
-        thisWidget.value = dateStr;
+        thisWidget.value = dateStr[0] ? utils.dateToStr(dateStr[0]) : false;
         thisWidget.reanderValue;
       }
     };
