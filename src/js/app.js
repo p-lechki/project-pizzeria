@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 
+import { StartPage } from './components/StartPage.js';
 import {
   Product
 } from './components/Product.js';
@@ -64,16 +65,38 @@ const app = {
     });
   },
 
+  initStartPage: function () {
+    const thisApp = this;
+
+    const startPage = document.querySelector(select.containerOf.startPage);
+
+    thisApp.startPage = new StartPage(startPage);
+  },
+
   initPages: function () {
     const thisApp = this;
 
+    thisApp.initStartPage();
     thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
 
-    thisApp.navLinks = Array.from(document.querySelectorAll(select.nav.links));
+    thisApp.navLinks = [
+      ...document.querySelectorAll('.logo .link'),
+      ...document.querySelectorAll(select.nav.links),
+      ...document.querySelectorAll(select.startPage.itemLinks),
+    ];
 
-    let pagesMatchingHash = [];
+    const idFromHash = window.location.hash.replace('#/', '');
 
-    thisApp.activatePage(pagesMatchingHash.length ? pagesMatchingHash[0].id : thisApp.pages[0].id);
+    let pagesMatchingHash = thisApp.pages[0].id;
+
+    for (let page of thisApp.pages) {
+      if (page.id === idFromHash) {
+        pagesMatchingHash = page.id;
+        break;
+      }
+    }
+
+    thisApp.activatePage(pagesMatchingHash);
 
     for (let link of thisApp.navLinks) {
       link.addEventListener('click', function (event) {
@@ -83,23 +106,40 @@ const app = {
         /* TODO: get page id from href */
         const href = clickedElement.getAttribute('href').replace('#', '');
         /* TODO: activate page */
-        thisApp.activatePage(href);
+        window.location.hash = `#/${href}`;
       });
     }
+
+    window.onhashchange = function () {
+
+      if (window.location.hash) {
+        const href = window.location.hash.replace('#/', '');
+        thisApp.activatePage(href);
+      } else {
+        thisApp.activatePage('startPage');
+      }
+    };
   },
 
   activatePage(pageId) {
     const thisApp = this;
 
-    for (let link of thisApp.navLinks) {
-      link.classList.toggle(classNames.nav.active, link.getAttribute('href') == '#' + pageId);
-    }
+    const cartElement = document.querySelector(select.containerOf.cart);
 
-    for (let page of thisApp.pages) {
-      page.classList.toggle(classNames.nav.active, page.id === pageId);
-    }
+    pageId === select.startPage.main ? cartElement.getElementsByClassName.display = classNames.cart.none : cartElement.getElementsByClassName.display = classNames.cart.visible;
 
-    window.location.hash = '#/' + pageId;
+    Object.values(thisApp.pages).forEach(function (page) {
+      page.classList.toggle(classNames.pages.active, page.id = pageId);
+    });
+
+    thisApp.navLinks.forEach(function (link) {
+      link.classList.toggle(
+        classNames.nav.active,
+        link.getAttribute('href') === `#${pageId}`
+      );
+
+      pageId === select.startPage.main && !link.classList.contains('link') ? link.style.display = classNames.nav.none : link.style.display = classNames.nav.visible;
+    });
   },
 
   initBooking: function () {
