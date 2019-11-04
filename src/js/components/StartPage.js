@@ -7,7 +7,7 @@ export class StartPage {
 
     thisPage.page = page;
     thisPage.render(page);
-    thisPage.initSlider();
+    // thisPage.initSlider();
   }
 
   render(page) {
@@ -21,38 +21,38 @@ export class StartPage {
     thisPage.dom.wrapper.appendChild(thisPage.element);
   }
 
-  initSlider() {
-    const thisPage = this;
+  // initSlider() {
+  //   const thisPage = this;
 
-    let slideIndex = 0;
-    thisPage.showSlides(slideIndex);
-  }
+  //   let slideIndex = 0;
+  //   thisPage.showSlides(slideIndex);
+  // }
 
-  showSlides(slideIndex) {
-    const thisPage = this;
+  // showSlides(slideIndex) {
+  //   const thisPage = this;
 
-    const slides = document.getElementsByClassName('element');
-    const dots = document.getElementsByClassName('dot');
+  //   const slides = document.getElementsByClassName('element');
+  //   const dots = document.getElementsByClassName('dot');
 
-    for (let slide of slides) {
-      slide.style.display = 'none';
-    }
+  //   for (let slide of slides) {
+  //     slide.style.display = 'none';
+  //   }
 
-    slideIndex++;
+  //   slideIndex++;
 
-    if (slideIndex > slides.length) {
-      slideIndex = 1;
-    }
+  //   if (slideIndex > slides.length) {
+  //     slideIndex = 1;
+  //   }
 
-    for (let dot of dots) {
-      dot.className = dot.className.replace(' active', '');
-    }
+  //   for (let dot of dots) {
+  //     dot.className = dot.className.replace(' active', '');
+  //   }
 
-    slides[slideIndex - 1].style.display = 'flex';
-    dots[slideIndex - 1].classList.add('active');
+  //   slides[slideIndex - 1].style.display = 'flex';
+  //   dots[slideIndex - 1].classList.add('active');
 
-    setTimeout(() => {
-      thisPage.showSlides(slideIndex);
-    }, 3000);
-  }
+  //   setTimeout(() => {
+  //     thisPage.showSlides(slideIndex);
+  //   }, 3000);
+  // }
 }

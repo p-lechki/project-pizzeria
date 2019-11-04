@@ -73,8 +73,8 @@ export const select = {
     form: '.order-confirmation [type="submit"]',
   },
   startPage: {
-    main: 'content-wrapper',
-    itemLinks: '.box a',
+    main: '.startPage',
+    nav: '.nav a',
   },
   nav: {
     links: '.main-nav a',
