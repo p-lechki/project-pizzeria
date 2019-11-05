@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 
-import { StartPage } from './components/StartPage.js';
 import {
   Product
 } from './components/Product.js';
@@ -15,6 +14,7 @@ import {
   settings,
   classNames
 } from './settings.js';
+import { LeadingPage } from './components/LeadingPage.js';
 
 const app = {
   initData: function () {
@@ -51,6 +51,12 @@ const app = {
     }
   },
 
+  initLeadingPage: function () {
+    const thisApp = this;
+
+    const leadingPage = document.querySelector(select.containerOf.leadingPage);
+    thisApp.leadingPage = new LeadingPage(leadingPage);
+  },
 
   initCart: function () {
     const thisApp = this;
@@ -65,28 +71,19 @@ const app = {
     });
   },
 
-  initStartPage: function () {
-    const thisApp = this;
-
-    const startPage = document.querySelector(select.containerOf.startPage);
-
-    thisApp.startPage = new StartPage(startPage);
-  },
-
   initPages: function () {
     const thisApp = this;
 
+    thisApp.initLeadingPage();
+
     thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
 
-    thisApp.links = Array.from(document.querySelectorAll('.link'));
-    console.log('links: ', thisApp.links);
-
     thisApp.navLinks = [
-      ...document.querySelectorAll('.link'),
       ...document.querySelectorAll(select.nav.links),
-      ...document.querySelectorAll('.startPage a')
+      ...document.querySelectorAll(select.leadingPage.nav),
     ];
-    console.log('navlinks: ', thisApp.navLinks);
+
+    console.log('leaging page nav: ', thisApp.navLinks);
 
     let pagesMatchingHash = [];
 
@@ -115,8 +112,12 @@ const app = {
     for (let page of thisApp.pages) {
       page.classList.toggle(classNames.nav.active, page.id === pageId);
     }
+    console.log('pageId: ', pageId);
 
-    window.location.hash = '#' + pageId;
+    window.location.hash = '#/' + pageId;
+
+    thisApp.hiddeThings(pageId);
+
   },
 
   initBooking: function () {
@@ -124,6 +125,24 @@ const app = {
 
     const bookingWidget = document.querySelector(select.containerOf.booking);
     thisApp.booking = new Booking(bookingWidget);
+  },
+
+  hiddeThings(pageId) {
+    const thisApp = this;
+
+    thisApp.cart = document.querySelector(select.containerOf.cart);
+    thisApp.nav = document.querySelector(select.containerOf.nav);
+
+    if (pageId === 'leadingPage') {
+      thisApp.cart.style.opacity = 0;
+      thisApp.nav.style.opacity = 0;
+    } else if (pageId === 'booking') {
+      thisApp.cart.style.opacity = 0;
+      thisApp.nav.style.opacity = 1;
+    } else {
+      thisApp.cart.style.opacity = 1;
+      thisApp.nav.style.opacity = 1;
+    }
   },
 
   init: function () {
@@ -136,7 +155,6 @@ const app = {
 
     thisApp.initPages();
     thisApp.initData();
-    thisApp.initStartPage();
     thisApp.initCart();
     thisApp.initBooking();
   },

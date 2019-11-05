@@ -11,7 +11,6 @@
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Signika:700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -25,9 +24,9 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#leadingPage">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
-          <a href="#startPage">Back to main Page</a>
         </div>
         <div id="cart" class="cart">
           <div class="cart__summary">
@@ -67,8 +66,8 @@
   </header>
 
   <div id="pages">
-    <section id="startPage">
-      <div class="startPage-wrapper container"></div>
+    <section id="leadingPage">
+      <div class="leadingPage-wrapper container"></div>
     </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
@@ -78,29 +77,135 @@
     </section>
   </div>
 
-  <script id="template-startPage" type="text/x-handlebars-template">
-    <div class="startPage">
-
-      <section class="nav-boxes">
-        <div class="nav">
-          <a href="#order" class="link">Order</a>
-          <a href="#booking" class="link">Booking</a>
+  <script id="template-leadingPage" type="text/x-handlebars-template">
+    <div class="leadingPage">
+      <section class="nav">
+        <div class="nav-buttons">
+          <a href="#order" class="nav-btn">
+            <h3 class="btn-firstLine">Order Online</h3>
+            <h4 class="btn-secoundLine">Lorem, ipsum dolor</h4>
+          </a>
+          <a href="#booking" class="nav-btn">
+              <h3 class="btn-firstLine">Book a Table</h3>
+              <h4 class="btn-secoundLine">Lorem, ipsum dolor</h4>
+          </a>
+        </div>
+        <div class="open-info">
+          <h3 class="fistLine">Openning Hours:</h3>
+          <h4 class="secoundLine">Tue-Sun, 12pm - 12am</h4>
         </div>
       </section>
 
-      <section class="slider">
-        <h1>Here will be slider</h1>
-      </section>
+      <section class="slider-section">
+          <div class="elements-list" id="slider">
+            <article class="element fade">
+              <div class="element-img">
+                <img src="./images/assets/pizza-3.jpg" alt="pizza" class="img">
+              </div>
+              <div class="element-text">
+                <h3 class="slide-title">Amazing services</h3>
+                <p class="slide-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem iure sequi explicabo ab
+                  est architecto nemo fugit aliquam aut voluptatibus, exercitationem rem aspernatur, dolor commodi?</p>
+                <p clas="slide-signature">- Margaret</p>
+              </div>
+            </article>
+            <article class="element fade">
+              <div class="element-img">
+                <img src="./images/assets/pizza-4.jpg" alt="pizza" class="img">
+              </div>
+              <div class="element-text">
+                <h3 class="slide-title">Suprem Late</h3>
+                <p class="slide-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem iure sequi explicabo ab
+                  est architecto nemo fugit aliquam aut voluptatibus, exercitationem rem aspernatur, dolor commodi?</p>
+                <p clas="slide-signature">- Mary</p>
+              </div>
+            </article>
+            <article class="element fade">
+              <div class="element-img">
+                <img src="./images/assets/pizza-5.jpg" alt="pizza" class="img">
+              </div>
+              <div class="element-text">
+                <h3 class="slide-title">Awesom services</h3>
+                <p class="slide-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem iure sequi explicabo ab
+                  est architecto nemo fugit aliquam aut voluptatibus, exercitationem rem aspernatur, dolor commodi?</p>
+                <p clas="slide-signature">- Margaret</p>
+              </div>
+            </article>
+          </div>
+          <div class="slides-nav">
+            <i class="fas fa-circle dot"></i>
+            <i class="fas fa-circle dot"></i>
+            <i class="fas fa-circle dot"></i>
+          </div>
+        </section>
 
-      <section class="gallery">
-        <h1>Here will be gallery</h1>
-      </section>
+        <section class="gallery-section">
+            <div class="gallery-item">
+              <div class="icons">
+                <a href="#" class="like-link">
+                  <i class="fas fa-heart icon"></i>
+                </a>
+                <a href="#" class="item-link">
+                  <i class="fas fa-share-alt icon"></i>
+                </a>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="icons">
+                <a href="#" class="like-link">
+                  <i class="fas fa-heart icon"></i>
+                </a>
+                <a href="#" class="item-link">
+                  <i class="fas fa-share-alt icon"></i>
+                </a>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="icons">
+                <a href="#" class="like-link">
+                  <i class="fas fa-heart icon"></i>
+                </a>
+                <a href="#" class="item-link">
+                  <i class="fas fa-share-alt icon"></i>
+                </a>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="icons">
+                <a href="#" class="like-link">
+                  <i class="fas fa-heart icon"></i>
+                </a>
+                <a href="#" class="item-link">
+                  <i class="fas fa-share-alt icon"></i>
+                </a>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="icons">
+                <a href="#" class="like-link">
+                  <i class="fas fa-heart icon"></i>
+                </a>
+                <a href="#" class="item-link">
+                  <i class="fas fa-share-alt icon"></i>
+                </a>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <div class="icons">
+                <a href="#" class="like-link">
+                  <i class="fas fa-heart icon"></i>
+                </a>
+                <a href="#" class="item-link">
+                  <i class="fas fa-share-alt icon"></i>
+                </a>
+              </div>
+            </div>
+        </section>
 
-      <footer class="footer">
-        <a href="http://instagram.com" class="footer-link" target="_blank">View more on instagram</a>
+      <footer>
+        <a href="http://www.instagram.com" class="footer-link">View more on instagram</a>
       </footer>
-
-    </div>
+  </div>
   </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
@@ -279,7 +384,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="vendor/range-slider.min.js"></script>
-  <!-- <script src="vendor/slider.js"></script> -->
   <script src="js/app.js" type="module"></script>
 </body>
 

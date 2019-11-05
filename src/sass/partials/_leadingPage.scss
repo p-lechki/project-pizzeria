@@ -1,0 +1,210 @@
+.leadingPage-wrapper {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 6) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+section.nav {
+  .nav-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+    max-height: $base-size * 10;
+    overflow: hidden;
+
+    .nav-btn{
+      width: 49%;
+      background-color: $color-dark;
+      border-radius: $radius;
+      text-decoration: none;
+      color: $color-light;
+      line-height: 1;
+      transition: padding-top .5s linear;
+      padding-top: $base-size * 2;
+
+      &:hover {
+        padding: 0;
+
+        .btn-secoundLine {
+          opacity: 1;
+        }
+      }
+
+      &:nth-of-type(1){
+        background: $color-dark url(../../images/assets/pizza-1.jpg) no-repeat center center;
+      }
+
+      &:nth-of-type(2){
+        background: $color-dark url(../../images/assets/pizza-2.jpg) no-repeat center center;
+      }
+
+      .btn-firstLine {
+        text-transform: uppercase;
+        font-size: $base-size * 2.15;
+      }
+
+      .btn-secoundLine {
+        font-weight: normal;
+        opacity: 0;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .open-info{
+    margin-top: $base-size * 0.5;
+    width: 100%;
+    background-color: $color-main;
+    border-radius: $radius;
+    color: $color-light;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.1;
+    height: $base-size * 10;
+
+    .fistLine{
+      font-size: $base-size * 2.15;
+    }
+
+    .secoundLine {
+      font-size: $base-size + 2;
+      font-weight: normal;
+      margin: 5;
+    }
+  }
+}
+
+.slider-section {
+  margin: $base-size * 6 0;
+  .elements-list {
+    margin-bottom: $base-size * 3;
+
+  .fade {
+    animation: fade 1.5;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0.4;
+    }
+
+  to {
+      opacity: 1;
+    }
+  }
+
+  .element {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+
+    .element-img {
+      width: $base-size * 16;
+      height: $base-size * 16;
+      overflow: hidden;
+      border-radius: $radius;
+
+      .img {
+        height: 100%;
+        object-fit: cover;
+      }
+     }
+
+     .element-text {
+        width: $base-size * 30;
+      }
+    }
+  }
+  .slides-nav{
+    display: flex;
+    justify-content: center;
+
+    .dot {
+      cursor: pointer;
+      font-size: $base-size * 0.8;
+      margin: 0 $base-size * 0.5;
+
+      &::before{
+      color: $color-disabled;
+    }
+  }
+
+  .dot.active::before{
+    color: $color-dark;
+    }
+  }
+}
+
+.gallery-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: $base-size * 2;
+
+  .gallery-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32%;
+    height: $base-size * 16;
+    background-size: auto 100%;
+    margin-bottom: $base-size;
+    border-radius: $radius;
+    overflow: hidden;
+
+    &:hover{
+      filter: brightness(85%);
+
+    .icon {
+      opacity: 1;
+    }
+  }
+
+    &:nth-of-type(1){
+      background: $color-dark url(../../images/assets/pizza-7.jpg) no-repeat center center;
+    }
+
+    &:nth-of-type(2){
+      background: $color-dark url(../../images/assets/pizza-6.jpg) no-repeat center center;
+    }
+
+    &:nth-of-type(3){
+      background: $color-dark url(../../images/assets/pizza-5.jpg) no-repeat center center;
+    }
+
+    &:nth-of-type(4){
+      background: $color-dark url(../../images/assets/pizza-4.jpg) no-repeat center center;
+    }
+
+    &:nth-of-type(5){
+      background: $color-dark url(../../images/assets/pizza-3.jpg) no-repeat center center;
+    }
+
+    &:nth-of-type(6){
+      background: $color-dark url(../../images/assets/pizza-2.jpg) no-repeat center center;
+    }
+
+    .icon {
+      opacity: 0;
+      font-size: $base-size * 1.5;
+      color: $color-light;
+      margin: 0 $base-size * 0.4;
+
+      &:hover{
+        color: $color-main;
+      }
+    }
+  }
+}
+
+footer {
+  .footer-link {
+    color: $color-main;
+  }
+}

@@ -5,7 +5,7 @@ export class StartPage {
   constructor(page) {
     const thisPage = this;
 
-    thisPage.page = page;
+    // thisPage.page = page;
     thisPage.render(page);
     // thisPage.initSlider();
   }
