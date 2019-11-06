@@ -78,6 +78,7 @@ export class Booking {
 
     thisBooking.dom.form.addEventListener('click', function () {
       event.preventDefault();
+      thisBooking.checkIfFree();
       thisBooking.makeReservation();
     });
   }
@@ -250,33 +251,33 @@ export class Booking {
         })
         .then(function (parsedResponse) {
           console.log('parsedResponse: ', parsedResponse);
-          thisBooking.checkTableAvailabity();
           thisBooking.getData();
         })
       ) : alert('No table has been chosen');
   }
 
-  checkTableAvailabity() {
+  checkIfFree() {
     const thisBooking = this;
 
     const url = new URL(settings.db.booking, `http://${settings.db.url}`);
-
-    const reservedTables = {};
+    let reservetionOnCurrentDay = {};
 
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(reservedTables),
+      body: JSON.stringify(thisBooking.datePicker.value),
     };
 
     fetch(url, options)
-      .then(function (rawResponse) {
-        return rawResponse.json();
+      .then(function (respons) {
+        return respons.json();
       })
       .then(function (parsedResponse) {
-        console.log('parsedResponse booking: ', parsedResponse);
+
+        reservetionOnCurrentDay = parsedResponse;
+        console.log('reservetionOnCurrentDay: ', reservetionOnCurrentDay);
       });
   }
 }
