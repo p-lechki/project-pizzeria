@@ -41,7 +41,7 @@ export class Booking {
     element.appendChild(visualElement);
 
     thisBooking.dom.peopleAmount = element.querySelector(select.booking.peopleAmount);
-    thisBooking.dom.hoursAmount = element.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.hoursAmount = element.querySelector(select.booking.hoursAmount);
     thisBooking.dom.datePicker = element.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = element.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = element.querySelectorAll(select.booking.tables);
@@ -55,7 +55,7 @@ export class Booking {
     const thisBooking = this;
 
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
@@ -227,6 +227,9 @@ export class Booking {
       ppl: parseInt(thisBooking.dom.people.value),
       starters: [],
     };
+
+    const temp = parseInt(reservetion.hour);
+    console.log('hour to int', temp);
 
     for (let starter of thisBooking.dom.starters) {
       starter.checked ? reservetion.starters.push(starter.value) : '';

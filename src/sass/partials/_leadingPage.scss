@@ -82,27 +82,29 @@ section.nav {
 
 .slider-section {
   margin: $base-size * 6 0;
+
   .elements-list {
     margin-bottom: $base-size * 3;
 
-  .fade {
-    animation: fade 1.5;
-  }
-
-  @keyframes fade {
-    from {
-      opacity: 0.4;
+    .fade {
+      animation: fade 1.5;
     }
 
-  to {
-      opacity: 1;
-    }
-  }
+    @keyframes fade {
+      from {
+        opacity: 0.4;
+      }
 
-  .element {
-    display: none;
-    justify-content: space-between;
-    align-items: center;
+      to {
+        opacity: 1;
+      }
+    }
+
+    .element {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     .element-img {
       width: $base-size * 16;
@@ -114,13 +116,13 @@ section.nav {
         height: 100%;
         object-fit: cover;
       }
-     }
+    }
 
-     .element-text {
-        width: $base-size * 30;
-      }
+    .element-text {
+      width: $base-size * 30;
     }
   }
+
   .slides-nav{
     display: flex;
     justify-content: center;
@@ -131,12 +133,12 @@ section.nav {
       margin: 0 $base-size * 0.5;
 
       &::before{
-      color: $color-disabled;
+        color: $color-disabled;
+      }
     }
-  }
 
-  .dot.active::before{
-    color: $color-dark;
+    .dot.active::before{
+      color: $color-dark;
     }
   }
 }
@@ -161,10 +163,10 @@ section.nav {
     &:hover{
       filter: brightness(85%);
 
-    .icon {
-      opacity: 1;
+      .icon {
+        opacity: 1;
+      }
     }
-  }
 
     &:nth-of-type(1){
       background: $color-dark url(../../images/assets/pizza-7.jpg) no-repeat center center;

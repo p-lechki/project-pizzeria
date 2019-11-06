@@ -24,10 +24,8 @@ export class LeadingPage {
   }
 
   initSlider() {
-    const thisPage = this;
-
-    let slideIndex = 0;
-    thisPage.showSlides(slideIndex);
+    const slideIndex = 0;
+    this.showSlides(slideIndex);
   }
 
   showSlides(slideIndex) {

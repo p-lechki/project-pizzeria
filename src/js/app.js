@@ -116,7 +116,7 @@ const app = {
 
     window.location.hash = '#/' + pageId;
 
-    thisApp.hiddeThings(pageId);
+    thisApp.hideNavOrCard(pageId);
 
   },
 
@@ -127,7 +127,7 @@ const app = {
     thisApp.booking = new Booking(bookingWidget);
   },
 
-  hiddeThings(pageId) {
+  hideNavOrCard(pageId) {
     const thisApp = this;
 
     thisApp.cart = document.querySelector(select.containerOf.cart);
