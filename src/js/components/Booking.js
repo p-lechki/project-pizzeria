@@ -250,9 +250,34 @@ export class Booking {
         })
         .then(function (parsedResponse) {
           console.log('parsedResponse: ', parsedResponse);
+          thisBooking.checkTableAvailabity();
           thisBooking.getData();
         })
       ) : alert('No table has been chosen');
+  }
+
+  checkTableAvailabity() {
+    const thisBooking = this;
+
+    const url = new URL(settings.db.booking, `http://${settings.db.url}`);
+
+    const reservedTables = {};
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reservedTables),
+    };
+
+    fetch(url, options)
+      .then(function (rawResponse) {
+        return rawResponse.json();
+      })
+      .then(function (parsedResponse) {
+        console.log('parsedResponse booking: ', parsedResponse);
+      });
   }
 }
 
