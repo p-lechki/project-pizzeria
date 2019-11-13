@@ -72,6 +72,7 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     form: '.order-confirmation [type="submit"]',
+    markedTables: '.floor-plan .temp',
   },
   leadingPage: {
     nav: '.nav a',
@@ -92,6 +93,7 @@ export const classNames = {
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
+    markedTable: 'temp',
   },
   nav: {
     active: 'active',

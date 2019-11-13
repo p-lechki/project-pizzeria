@@ -28,6 +28,7 @@ export class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.initActions();
+    thisBooking.selectTables = [];
   }
   reneder(element) {
     const thisBooking = this;
@@ -78,7 +79,6 @@ export class Booking {
 
     thisBooking.dom.form.addEventListener('click', function () {
       event.preventDefault();
-      thisBooking.checkIfFree();
       thisBooking.makeReservation();
     });
   }
@@ -208,11 +208,18 @@ export class Booking {
 
     thisBooking.tableId = table.getAttribute(settings.booking.tableIdAttribute);
 
-    !thisBooking.booked[thisBooking.date][thisBooking.hour].includes(parseInt(thisBooking.tableId)) ?
-      table.classList.toggle(classNames.booking.tableBooked) : alert('This table has been booked');
+    if(!thisBooking.booked[thisBooking.date][thisBooking.hour].includes(parseInt(thisBooking.tableId))){
+      table.classList.toggle(classNames.booking.tableBooked);
+      thisBooking.selectTables.push(parseInt(thisBooking.tableId));
+      console.log('selected table: ', thisBooking.selectTables);
+    }
+    else alert('This table has been booked');
 
-    if (!table.classList.contains(classNames.booking.tableBooked))
+    if (!table.classList.contains(classNames.booking.tableBooked)){
+      thisBooking.selectTables.pop(thisBooking.tableId);
       delete thisBooking.tableId;
+
+    }
   }
 
   makeReservation() {
@@ -223,14 +230,11 @@ export class Booking {
     const reservetion = {
       date: thisBooking.datePicker.value,
       hour: thisBooking.hourPicker.value,
-      table: parseInt(thisBooking.tableId),
+      table: thisBooking.selectTables,
       duration: parseInt(thisBooking.dom.duration.value),
       ppl: parseInt(thisBooking.dom.people.value),
       starters: [],
     };
-
-    const temp = parseInt(reservetion.hour);
-    console.log('hour to int', temp);
 
     for (let starter of thisBooking.dom.starters) {
       starter.checked ? reservetion.starters.push(starter.value) : '';
@@ -244,6 +248,8 @@ export class Booking {
       body: JSON.stringify(reservetion),
     };
 
+    console.log('reservetion.table',reservetion.table);
+
     reservetion.table !== undefined && !isNaN(reservetion.table) ?
       (fetch(url, options)
         .then(function (respons) {
@@ -256,30 +262,6 @@ export class Booking {
       ) : alert('No table has been chosen');
   }
 
-  checkIfFree() {
-    const thisBooking = this;
-
-    const url = new URL(settings.db.booking, `http://${settings.db.url}`);
-    let reservetionOnCurrentDay = {};
-
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(thisBooking.datePicker.value),
-    };
-
-    fetch(url, options)
-      .then(function (respons) {
-        return respons.json();
-      })
-      .then(function (parsedResponse) {
-
-        reservetionOnCurrentDay = parsedResponse;
-        console.log('reservetionOnCurrentDay: ', reservetionOnCurrentDay);
-      });
-  }
 }
 
 
