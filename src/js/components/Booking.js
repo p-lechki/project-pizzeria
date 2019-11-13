@@ -216,7 +216,9 @@ export class Booking {
     else alert('This table has been booked');
 
     if (!table.classList.contains(classNames.booking.tableBooked)){
-      thisBooking.selectTables.pop(thisBooking.tableId);
+      let pos = thisBooking.selectTables.indexOf(parseInt(thisBooking.tableId));
+      thisBooking.selectTables.splice(pos, parseInt(thisBooking.tableId));
+      console.log('selected table: ', thisBooking.selectTables);
       delete thisBooking.tableId;
 
     }
@@ -250,7 +252,7 @@ export class Booking {
 
     console.log('reservetion.table',reservetion.table);
 
-    reservetion.table !== undefined && !isNaN(reservetion.table) ?
+    reservetion.table !== undefined ?
       (fetch(url, options)
         .then(function (respons) {
           return respons.json();
@@ -258,6 +260,7 @@ export class Booking {
         .then(function (parsedResponse) {
           console.log('parsedResponse: ', parsedResponse);
           thisBooking.getData();
+          thisBooking.selectTables = [];
         })
       ) : alert('No table has been chosen');
   }
