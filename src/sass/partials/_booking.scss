@@ -24,10 +24,6 @@
   border-radius: $radius;
 }
 
-.active-table {
-  background-color: red;
-}
-
 .booking-option-title {
   @extend %h2;
   display: block;
@@ -161,6 +157,10 @@
 
     }
 
+    &.active-table {
+      background-color: orange;
+    }
+
     &.booked {
       cursor: not-allowed;
       color: lighten($color-dark, 40%);
@@ -175,11 +175,6 @@
         background: $color-dark;
         opacity: 0.4;
       }
-
-      &.active-table {
-        background-color: orange;
-      }
-
     }
   }
 
